@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[ListingsController::class,"index"]);
 
+Route::delete("/listings/{listing}",[ListingsController::class,"destroy"]);
+
+Route::get("/listings/create",[ListingsController::class,"create"]);
+
+Route::post("/listings",[ListingsController::class,"store"]);
+
 Route::get('/listings/{listing}',[ListingsController::class,"show"]);
 
 

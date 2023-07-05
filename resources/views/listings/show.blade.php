@@ -1,9 +1,6 @@
 @extends('layout')
 @section('content')
 @include('partials._search')
-@php
-    $tags = explode(",",$listing->tags);
-@endphp
             <a href="/" class="inline-block text-black ml-4 mb-4"
                 ><i class="fa-solid fa-arrow-left"></i> Back
             </a>
@@ -20,15 +17,7 @@
 
                         <h3 class="text-2xl mb-2">{{$listing->title}}</h3>
                         <div class="text-xl font-bold mb-4">{{$listing->company}}</div>
-                        <ul class="flex">
-                            @foreach($tags as $tag)
-                            <li
-                                class="bg-black text-white rounded-xl px-3 py-1 mr-2"
-                            >
-                                <a href="#">{{$tag}}</a>
-                            </li>
-                            @endforeach
-                        </ul>
+                        <x-listing-tags :tags="$listing->tags"/>
                         <div class="text-lg my-4">
                             <i class="fa-solid fa-location-dot"></i>
                             {{$listing->location}}
@@ -47,7 +36,7 @@
                                     href="mailto:{{$listing->email}}"
                                     class="block bg-laravel text-white mt-6 py-2 rounded-xl hover:opacity-80"
                                     ><i class="fa-solid fa-envelope"></i>
-                        {{$listing->email}}</a
+                        send email</a
                                 >
 
                                 <a
@@ -57,6 +46,11 @@
                                     ><i class="fa-solid fa-globe"></i> Visit
                                     Website</a
                                 >
+                                <form action="/listings/{{$listing->id}}" method="post">
+                                    @csrf
+                                    @method("delete")
+                                    <button>delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>
