@@ -1,18 +1,18 @@
-@extends('layout')
-@section('content')
+@extends("layout")
+@section("content")
 <div class="mx-4">
     <div
         class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24"
     >
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
-                Create a Gig
+                update a Gig
             </h2>
-            <p class="mb-4">Post a gig to find a developer</p>
         </header>
 
-        <form method="POST" action="/listings" enctype="multipart/form-data">
+        <form method="POST" action="/listings/{{$listing->id}}" enctype="multipart/form-data">
             @csrf
+            @method('put')
             <div class="mb-6">
                 <label
                     for="company"
@@ -23,7 +23,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="company"
-                    value="{{old('company')}}"
+                    value="{{$listing->company}}"
                 />
                 @error('company')
                 <p class="text-red-500">{{$message}}</p>
@@ -39,9 +39,10 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="title"
                     placeholder="Example: Senior Laravel Developer"
+                    value="{{$listing->title}}"
                 />
 
-                @error('company')
+                @error('title')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
@@ -57,10 +58,11 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="location"
                     placeholder="Example: Remote, Boston MA, etc"
+                    value="{{$listing->location}}"
 
                 />
 
-                @error('company')
+                @error('location')
                 <p class="text-red-500">{{$message}}</p>
                 @enderror
             </div>
@@ -73,7 +75,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="email"
-                    value="{{old('email')}}"
+                    value="{{$listing->email}}"
                 />
 
                 @error('email')
@@ -92,7 +94,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="website"
-                    value="{{old('website')}}"
+                    value="{{$listing->website}}"
                 />
 
                 @error('website')
@@ -109,7 +111,7 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="tags"
                     placeholder="Example: Laravel, Backend, Postgres, etc"
-                    value="{{old('tags')}}"
+                    value="{{$listing->tags}}"
 
                 />
 
@@ -141,8 +143,7 @@
                     name="description"
                     rows="10"
                     placeholder="Include tasks, requirements, salary, etc"
-                    value="{{old('description')}}"
-                ></textarea>
+                >{{$listing->description}}</textarea>
 
                 @error('description')
                 <p class="text-red-500">{{$message}}</p>
@@ -153,7 +154,7 @@
                 <button
                     class="bg-laravel text-white rounded py-2 px-4 hover:bg-black"
                 >
-                    Create Gig
+                    update Gig
                 </button>
 
                 <a href="/" class="text-black ml-4"> Back </a>
@@ -161,4 +162,4 @@
         </form>
     </div>
 </div>
-@endsection
+@endsection("content")

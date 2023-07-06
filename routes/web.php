@@ -22,6 +22,11 @@ Route::get("/listings/create",[ListingsController::class,"create"]);
 
 Route::post("/listings",[ListingsController::class,"store"]);
 
+Route::get("/listings/edit/{listing}",[ListingsController::class,"edit"]);
+
+Route::put("/listings/{listing}",[ListingsController::class,"update"]);
+
+
 Route::get('/listings/{listing}',[ListingsController::class,"show"]);
 
 
